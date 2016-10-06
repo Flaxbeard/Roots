@@ -57,7 +57,14 @@ public class EntityFrostShard  extends EntityFlying {// implements IRangedAttack
         setSize(1.0f,1.0f);
         this.isAirBorne = true;
         this.setInvisible(true);
-        setVelocity(rand.nextFloat()-0.75,rand.nextFloat()*0.75+0.25,rand.nextFloat()-0.75); 
+        if(worldIn.isRemote){
+        	setVelocity(rand.nextFloat()-0.75,rand.nextFloat()*0.75+0.25,rand.nextFloat()-0.75); 
+        }
+    }
+    
+    @Override
+    protected void entityInit(){
+    	super.entityInit();
     }
     
     public void initSpecial(float damage){
@@ -89,7 +96,7 @@ public class EntityFrostShard  extends EntityFlying {// implements IRangedAttack
     public void onUpdate(){
     	super.onUpdate();
     	lifetime --;
-    	this.setVelocity(motionX, motionY-0.025, motionZ);
+    	this.motionY = motionY-0.025;
     	if (lifetime == 0){
     		this.getEntityWorld().removeEntity(this);
     	}
