@@ -13,6 +13,7 @@ import elucent.roots.component.ComponentBase;
 import elucent.roots.component.EnumCastType;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,6 +27,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 
 public class ComponentSunflower extends ComponentBase{
@@ -38,10 +42,14 @@ public class ComponentSunflower extends ComponentBase{
 	public void doEffect(World world, Entity caster, EnumCastType type, double x, double y, double z, double potency, double duration, double size){
 		if (type == EnumCastType.SPELL){	
 			int damageDealt = 0;
+			boolean pvp = true;
 			ArrayList<EntityLivingBase> targets = (ArrayList<EntityLivingBase>) world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x-(2.0+size),y-(2.0+size),z-size,x+(2.0+size),y+(2.0+size),z+(2.0+size)));
+			if(!world.isRemote){
+				pvp = world.getMinecraftServer().isPVPEnabled();
+			}	
 			for (int i = 0; i < targets.size(); i ++){
 				if (targets.get(i).getUniqueID() != caster.getUniqueID()){
-					if (targets.get(i) instanceof EntityPlayer && !world.getMinecraftServer().isPVPEnabled()){
+					if (targets.get(i) instanceof EntityPlayer && !pvp){
 						
 					}
 					else {
