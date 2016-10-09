@@ -1,5 +1,6 @@
 package elucent.roots.gui;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import elucent.roots.ConfigManager;
@@ -124,6 +125,21 @@ public class GuiTablet extends GuiScreen {
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks){
+		
+		int d = Mouse.getDWheel();
+		if (d > 0){
+			currentGroup --;
+			if (currentGroup < 0){
+				currentGroup = ResearchManager.globalResearches.size()-1;
+			}
+		}
+		if (d < 0){
+			currentGroup ++;
+			if (currentGroup == ResearchManager.globalResearches.size()){
+				currentGroup = 0;
+			}
+		}
+		
 		this.player.stopActiveHand();
 		GlStateManager.color(1, 1, 1, 1);
 		RenderHelper.disableStandardItemLighting();

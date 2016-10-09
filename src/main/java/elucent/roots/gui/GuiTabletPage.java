@@ -2,6 +2,7 @@ package elucent.roots.gui;
 
 import java.util.ArrayList;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import elucent.roots.RegistryManager;
@@ -111,6 +112,14 @@ public class GuiTabletPage extends GuiScreen {
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks){
+		int d = Mouse.getDWheel();
+		if (d > 0 && showLeftArrow){
+			this.currentPage --;
+		}
+		if (d < 0 && showRightArrow){
+			this.currentPage ++;
+		}
+		
 		GlStateManager.color(1, 1, 1, 1);
 		RenderHelper.disableStandardItemLighting();
 		RenderHelper.enableGUIStandardItemLighting();
