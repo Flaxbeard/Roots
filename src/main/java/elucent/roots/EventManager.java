@@ -222,37 +222,47 @@ public class EventManager {
 					int maxManaNumber = Math.round(ManaProvider.get(player).getMaxMana());
 					
 					int offsetX = 0;
+					int offsetY = 0;
 					
 					b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 					while (maxManaNumber > 0){
-						this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-ConfigManager.manaBarOffset, w/2+10+offsetX, h-ConfigManager.manaBarOffset, 0, 0, 9, 9);
+						this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-ConfigManager.manaBarOffset+offsetY, w/2+10+offsetX, h-ConfigManager.manaBarOffset+offsetY, 0, 0, 9, 9);
 						if (maxManaNumber > 4){
 							maxManaNumber -= 4;
 							offsetX += 8;
+							if (offsetX == 10 * 8){
+								offsetX = 0;
+								offsetY -= 9;
+							}
 						}
 						else {
 							maxManaNumber = 0;
 						}
 					}
 					offsetX = 0;
+					offsetY = 0;
 					while (manaNumber > 0){
 						if (manaNumber > 4){
-							this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-ConfigManager.manaBarOffset, w/2+10+offsetX, h-ConfigManager.manaBarOffset, 0, 16, 9, 9);
+							this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-ConfigManager.manaBarOffset+offsetY, w/2+10+offsetX, h-ConfigManager.manaBarOffset+offsetY, 0, 16, 9, 9);
 							manaNumber -= 4;
 							offsetX += 8;
+							if (offsetX == 10 * 8){
+								offsetX = 0;
+								offsetY -= 9;
+							}
 						}
 						else {
 							if (manaNumber == 4){
-								this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-ConfigManager.manaBarOffset, w/2+10+offsetX, h-ConfigManager.manaBarOffset, 0, 16, 9, 9);
+								this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-ConfigManager.manaBarOffset+offsetY, w/2+10+offsetX, h-ConfigManager.manaBarOffset+offsetY, 0, 16, 9, 9);
 							}
 							if (manaNumber == 3){
-								this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-ConfigManager.manaBarOffset, w/2+10+offsetX, h-ConfigManager.manaBarOffset, 16, 16, 9, 9);
+								this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-ConfigManager.manaBarOffset+offsetY, w/2+10+offsetX, h-ConfigManager.manaBarOffset+offsetY, 16, 16, 9, 9);
 							}
 							if (manaNumber == 2){
-								this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-ConfigManager.manaBarOffset, w/2+10+offsetX, h-ConfigManager.manaBarOffset, 32, 16, 9, 9);
+								this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-ConfigManager.manaBarOffset+offsetY, w/2+10+offsetX, h-ConfigManager.manaBarOffset+offsetY, 32, 16, 9, 9);
 							}
 							if (manaNumber == 1){
-								this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9), w/2+19+offsetX, h-ConfigManager.manaBarOffset, w/2+10+offsetX, h-ConfigManager.manaBarOffset, 48, 16, 9, 9);
+								this.drawQuad(b, w/2+10+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-(ConfigManager.manaBarOffset-9)+offsetY, w/2+19+offsetX, h-ConfigManager.manaBarOffset+offsetY, w/2+10+offsetX, h-ConfigManager.manaBarOffset+offsetY, 48, 16, 9, 9);
 							}
 							manaNumber = 0;
 						}
